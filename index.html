@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VINCEZO - Abaetetuba - PA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafff5; --dark: #1a3300; --accent: #4caf1a;
+            --mid: #5a7a3a; --white: #ffffff; --text: #1a3300;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Lato', sans-serif; background:var(--bg); color:var(--text); }
+
+        nav {
+            position:fixed; top:0; width:100%; z-index:200;
+            display:flex; justify-content:space-between; align-items:center;
+            padding:1.2rem 4rem;
+            background:rgba(255,255,255,0.92);
+            backdrop-filter:blur(12px);
+            border-bottom:1px solid rgba(0,0,0,0.07);
+        }
+        .nav-brand { font-family:'Abril Fatface', cursive; font-size:1.35rem; color:var(--accent); display:flex; align-items:center; gap:.6rem; }
+        .nav-links { display:flex; gap:2.5rem; list-style:none; }
+        .nav-links a { text-decoration:none; color:var(--text); font-size:.9rem; font-weight:500; position:relative; padding-bottom:4px; }
+        .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent); transition:width .3s; }
+        .nav-links a:hover::after { width:100%; }
+
+        .hero { padding-top:100px; min-height:95vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:4rem; max-width:1200px; margin:0 auto; padding-left:4rem; padding-right:4rem; }
+        .eyebrow { display:inline-flex; align-items:center; gap:.5rem; background:rgba(0,0,0,0.05); color:var(--accent); padding:.4rem 1rem; border-radius:4px; font-size:.82rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; margin-bottom:1.5rem; border-left:3px solid var(--accent); }
+        .hero h1 { font-family:'Abril Fatface', cursive; font-size:clamp(2.6rem,5vw,4.2rem); line-height:1.1; color:var(--text); margin-bottom:1.5rem; }
+        .hero h1 em { color:var(--accent); font-style:italic; }
+        .hero p { font-size:1.05rem; color:var(--mid); line-height:1.8; max-width:420px; margin-bottom:2.5rem; font-weight:300; }
+        .btn-cta { display:inline-flex; align-items:center; gap:.6rem; background:var(--accent); color:#000; padding:.9rem 2.2rem; border-radius:6px; text-decoration:none; font-weight:600; font-size:.95rem; box-shadow:0 8px 24px rgba(0,0,0,.25); transition:all .3s; }
+        .btn-cta:hover { opacity:.85; transform:translateY(-2px); }
+        .btn-outline { display:inline-flex; align-items:center; gap:.6rem; border:1.5px solid var(--text); color:var(--text); padding:.9rem 2.2rem; border-radius:6px; text-decoration:none; font-weight:500; font-size:.95rem; transition:all .3s; margin-left:1rem; }
+        .btn-outline:hover { background:var(--text); color:var(--bg); }
+
+        .hero-visual { position:relative; display:flex; justify-content:center; align-items:center; }
+        .hero-circle { width:380px; height:380px; border-radius:50%; background:linear-gradient(135deg, var(--accent), var(--dark)); display:flex; align-items:center; justify-content:center; font-size:7rem; box-shadow:0 30px 80px rgba(0,0,0,.3); animation:bob 4s ease-in-out infinite; }
+        @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+        .bubble { position:absolute; background:var(--white); border-radius:14px; padding:.7rem 1.1rem; box-shadow:0 8px 24px rgba(0,0,0,.12); font-weight:600; font-size:.82rem; color:var(--dark); display:flex; align-items:center; gap:.5rem; }
+        .bubble-1 { top:30px; right:-20px; animation:flt 3s ease-in-out infinite; }
+        .bubble-2 { bottom:60px; left:-30px; animation:flt 3.5s ease-in-out infinite 1s; }
+        @keyframes flt { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+        .products { background:var(--dark); padding:5rem 4rem; }
+        .products .container { max-width:1200px; margin:0 auto; }
+        .section-header { text-align:center; margin-bottom:3.5rem; }
+        .section-header h2 { font-family:'Abril Fatface', cursive; font-size:2.5rem; color:var(--white); margin-top:.8rem; }
+        .section-header h2 em { color:var(--accent); }
+        .prod-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+        .prod-card { background:rgba(255,255,255,.06); border-radius:16px; padding:2rem; border:1px solid rgba(255,255,255,.1); transition:all .3s; }
+        .prod-card:hover { background:rgba(255,255,255,.1); transform:translateY(-4px); }
+        .prod-icon { font-size:2.5rem; margin-bottom:1rem; }
+        .prod-card h3 { color:var(--white); font-weight:600; font-size:1.1rem; margin-bottom:.6rem; }
+        .prod-card p { color:rgba(255,255,255,.55); font-size:.92rem; line-height:1.6; font-weight:300; }
+
+        .about { padding:5rem 4rem; }
+        .about .container { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+        .about-text h2 { font-family:'Abril Fatface', cursive; font-size:2.3rem; color:var(--dark); margin-bottom:1.5rem; }
+        .about-text p { color:var(--mid); line-height:1.9; font-weight:300; margin-bottom:1rem; }
+        .data-cards { display:flex; flex-direction:column; gap:1rem; }
+        .data-card { background:var(--white); border-radius:12px; padding:1.4rem 1.6rem; box-shadow:0 2px 16px rgba(0,0,0,.06); border-left:4px solid var(--accent); display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+        .data-card.alt { border-left-color:var(--mid); }
+        .data-field { display:flex; flex-direction:column; }
+        .data-field .key { font-size:.75rem; font-weight:600; color:#aaa; text-transform:uppercase; letter-spacing:.07em; }
+        .data-field .val { font-size:.95rem; color:var(--dark); font-weight:500; margin-top:2px; }
+
+        .contact-bar { background:linear-gradient(135deg, var(--accent), var(--dark)); padding:3rem 4rem; text-align:center; }
+        .contact-bar h2 { font-family:'Abril Fatface', cursive; font-size:2rem; color:var(--white); margin-bottom:.5rem; }
+        .contact-bar p { color:rgba(255,255,255,.6); margin-bottom:2rem; font-weight:300; }
+        .contact-pills { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; }
+        .contact-pill { display:flex; align-items:center; gap:.6rem; background:rgba(255,255,255,.12); color:var(--white); padding:.75rem 1.6rem; border-radius:50px; font-size:.9rem; font-weight:500; backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,.2); }
+
+        footer { background:#021520; color:rgba(255,255,255,.4); padding:1.5rem 4rem; text-align:center; font-size:.82rem; }
+
+        @media(max-width:900px) {
+            .hero { grid-template-columns:1fr; padding:1.5rem; }
+            .hero-circle { width:260px; height:260px; font-size:5rem; }
+            .about .container { grid-template-columns:1fr; }
+            .prod-grid { grid-template-columns:1fr; }
+            nav { padding:1rem 1.5rem; }
+            .nav-links { display:none; }
+            .products,.about,.contact-bar { padding:3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-brand">🥩 VINCEZO</div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#produtos">Serviços</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <div class="hero-text">
+            <div class="eyebrow">🌿 Abaetetuba · PA</div>
+            <h1>Alimentos que <em>nutrem</em></h1>
+            <p>Distribuição atacadista de produtos alimentícios em geral para o Pará e toda a região Norte.</p>
+            <a href="#contato" class="btn-cta">Faça seu pedido →</a>
+            <a href="#produtos" class="btn-outline">Ver Serviços</a>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-circle">🥩</div>
+            <div class="bubble bubble-1">🌿 Abaetetuba - PA</div>
+            <div class="bubble bubble-2">✅ CNPJ Ativo</div>
+        </div>
+    </section>
+
+    <section id="produtos" class="products">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow" style="color:var(--accent);background:rgba(255,255,255,.08);border-left-color:var(--accent);">O que Oferecemos</div>
+                <h2>Nossos <em>serviços</em></h2>
+            </div>
+            <div class="prod-grid">
+        <div class="prod-card">
+            <div class="prod-icon">🥩</div>
+            <h3>Carnes e Proteínas</h3>
+            <p>Distribuição de proteínas e derivados de qualidade.</p>
+        </div>
+        <div class="prod-card">
+            <div class="prod-icon">🛒</div>
+            <h3>Mercadorias Gerais</h3>
+            <p>Linha completa de produtos para mercados e mercearias.</p>
+        </div>
+        <div class="prod-card">
+            <div class="prod-icon">🥤</div>
+            <h3>Bebidas</h3>
+            <p>Distribuição de bebidas para pontos de venda.</p>
+        </div>
+        <div class="prod-card">
+            <div class="prod-icon">🍽️</div>
+            <h3>Restaurantes</h3>
+            <p>Fornecimento para restaurantes e similares.</p>
+        </div>
+        <div class="prod-card">
+            <div class="prod-icon">📦</div>
+            <h3>Atacado</h3>
+            <p>Grandes volumes com preços competitivos para revendedores.</p>
+        </div>
+        <div class="prod-card">
+            <div class="prod-icon">🚚</div>
+            <h3>Entrega</h3>
+            <p>Logística de entrega com pontualidade e cuidado.</p>
+        </div></div>
+        </div>
+    </section>
+
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="about-text">
+                <h2>Sobre a VINCEZO</h2>
+                <p>Com CNPJ ativo desde 17/10/2022, a R BAIA VINCEZO DISTRIBUIDORA DE ALIMENTOS LTDA atua com compromisso, qualidade e ética no mercado.</p>
+                <p>Localizada em Abaetetuba - PA, somos referência no segmento, oferecendo produtos e serviços que superam as expectativas de nossos clientes.</p>
+                <p>Com CNPJ ativo e operações em plena regularidade, garantimos confiança e segurança em cada transação.</p>
+            </div>
+            <div class="data-cards">
+                <div class="data-card">
+                    <div class="data-field"><span class="key">Razão Social</span><span class="val">R BAIA VINCEZO DISTRIBUIDORA DE ALIMENTOS LTDA</span></div>
+                    <div class="data-field"><span class="key">CNPJ</span><span class="val">48.311.647/0001-60</span></div>
+                </div>
+                <div class="data-card alt">
+                    <div class="data-field"><span class="key">Abertura</span><span class="val">17/10/2022</span></div>
+                    <div class="data-field"><span class="key">Situação</span><span class="val">✅ Ativa</span></div>
+                </div>
+                <div class="data-card">
+                    <div class="data-field"><span class="key">Endereço</span><span class="val">Tv José Gonçalves Chaves, 895 - São Lourenço</span></div>
+                    <div class="data-field"><span class="key">Cidade</span><span class="val">Abaetetuba - PA</span></div>
+                </div>
+                <div class="data-card alt">
+                    <div class="data-field"><span class="key">CEP</span><span class="val">68.440-000</span></div>
+                    <div class="data-field"><span class="key">Telefone</span><span class="val">(91) 8332-3704</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato" class="contact-bar">
+        <h2>Entre em Contato</h2>
+        <p>Venha nos visitar ou fale conosco</p>
+        <div class="contact-pills">
+            <div class="contact-pill">📞 (91) 8332-3704</div>
+            <div class="contact-pill">✉️ rutilenebaia@hotmail.com</div>
+            <div class="contact-pill">📍 Tv José Gonçalves Chaves, 895 - São Lourenço — Abaetetuba - PA</div>
+        </div>
+    </section>
+
+    <footer>
+        CNPJ: 48.311.647/0001-60 · R BAIA VINCEZO DISTRIBUIDORA DE ALIMENTOS LTDA · © 2026 Todos os direitos reservados
+    </footer>
+</body>
+</html>
